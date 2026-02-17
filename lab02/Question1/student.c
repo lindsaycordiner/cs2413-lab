@@ -29,7 +29,8 @@
 #include <stddef.h>  // size_t
 #include <string.h>  // strlen
 
-bool isValid(const char *s) {
+bool isValid(const char *s) 
+{
     // TODO: Implement using a stack.
     //
     // Recommended approach:
@@ -54,6 +55,34 @@ bool isValid(const char *s) {
     // Note:
     // - Input contains only bracket characters, per the prompt.
 
-    (void)s; // remove after implementing
-    return false; // placeholder
+char stack[n];
+int top = -1;
+
+if(strlen(s) % 2 != 0)
+{
+        return false;
 }
+
+for(int i = 0; s[i] != 0; i++){
+        if(s[i] == '[' || s[i] == '{' || s[i] == '(')
+        {
+                stack[++top] = s[i];
+        }
+        else
+        {
+                if(top == -1){
+                        return false;
+                }
+
+                if((s[i] == ']' && stack[top] != '[') || (s[i] == '}' && stack[top] != '{') || (s[i] == ')' && stack[top] != '('))
+                {
+                        return false;
+                }
+
+                top = top-1;
+
+        }
+        return top == -1;
+} 
+}
+
